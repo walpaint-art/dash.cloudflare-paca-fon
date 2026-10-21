@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# artefatos de build
+dist/
+*.zip

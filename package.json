@@ -1,0 +1,27 @@
+{
+  "name": "videochamada-web",
+  "version": "1.0.0",
+  "description": "Videochamada de áudio e vídeo pelo navegador - sala única, até 10 participantes, sem histórico",
+  "main": "server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build": "node scripts/build.js",
+    "pack": "npm run build && powershell -Command \"Compress-Archive -Path 'dist/*' -DestinationPath 'videochamada-web.zip' -Force\""
+  },
+  "keywords": [
+    "webrtc",
+    "videoconferencia",
+    "socket.io",
+    "p2p"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
