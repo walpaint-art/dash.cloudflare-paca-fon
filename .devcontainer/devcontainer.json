@@ -1,0 +1,21 @@
+{
+  "name": "videochamada-web",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "postCreateCommand": "npm ci",
+  "postStartCommand": "nohup node server.js > /tmp/server.log 2>&1 &",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "videochamada-web",
+      "onAutoForward": "openPreview",
+      "visibility": "public"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
