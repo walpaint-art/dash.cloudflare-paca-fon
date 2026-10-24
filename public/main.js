@@ -66,12 +66,16 @@ const attachBtn = document.getElementById("attachBtn");
 const fileInput = document.getElementById("fileInput");
 
 const toast = document.getElementById("toast");
+const chatPeek = document.getElementById("chatPeek");
+const chatPeekThumb = document.getElementById("chatPeekThumb");
+const chatPeekName = document.getElementById("chatPeekName");
+const chatPeekText = document.getElementById("chatPeekText");
 const captureBlock = document.getElementById("captureBlock");
 
 // ---------- CONSTANTES ----------
 const NAMES = ["ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT", "GOLF", "HOTEL", "INDIA", "JULIET"];
-const MAX_PHOTO = 1 * 1024 * 1024;   // 1 MB
-const MAX_VIDEO = 2 * 1024 * 1024;   // 2 MB
+const MAX_PHOTO = 5 * 1024 * 1024;   // 5 MB
+const MAX_VIDEO = 7 * 1024 * 1024;   // 7 MB
 const MAX_W = 1280;
 const MAX_H = 720;
 
@@ -204,6 +208,9 @@ function showToast(msg) {
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+  // esconde a miniatura de mensagem ao trocar de tela
+  const peek = document.getElementById("chatPeek");
+  if (peek && id !== "call-screen") peek.classList.remove("show");
 }
 
 function nowTime() {
@@ -1214,9 +1221,41 @@ function addMessage(fromName, mine, body) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// ---------- MINIATURA DE MENSAGEM DURANTE A CHAMADA ----------
+function emChamadaAtiva() {
+  return callScreen.classList.contains("active") && roster.size >= 2;
+}
+
+function showChatPeek(fromName, body) {
+  if (!chatPeek) return;
+
+  // miniatura (foto) ou ícone (texto/vídeo)
+  chatPeekThumb.innerHTML = "";
+  if (body.type === "file" && String(body.fileType || "").startsWith("image/")) {
+    const img = document.createElement("img");
+    img.src = body.data;
+    img.alt = "";
+    chatPeekThumb.appendChild(img);
+  } else {
+    const icon = document.createElement("span");
+    icon.className = "material-symbols-outlined text-[18px]";
+    icon.textContent = body.type === "file" ? "movie" : "chat";
+    chatPeekThumb.appendChild(icon);
+  }
+
+  chatPeekName.textContent = fromName || "Mensagem";
+  chatPeekText.textContent =
+    body.type === "file" ? body.fileName || "Arquivo" : body.text || "";
+
+  chatPeek.classList.add("show");
+  clearTimeout(showChatPeek._t);
+  showChatPeek._t = setTimeout(() => chatPeek.classList.remove("show"), 2000);
+}
+
 socket.on("chat", (msg) => {
   const mine = msg.fromId === socket.id;
   addMessage(msg.from, mine, msg);
+  if (!mine && emChamadaAtiva()) showChatPeek(msg.from, msg);
 });
 
 socket.on("chat-error", (msg) => {
@@ -1251,7 +1290,7 @@ fileInput.addEventListener("change", () => {
   }
 
   const limit = isImage ? MAX_PHOTO : MAX_VIDEO;
-  const label = isImage ? "1 MB" : "2 MB";
+  const label = isImage ? "5 MB" : "7 MB";
   if (file.size > limit) {
     showToast(`Arquivo grande demais. Máximo ${label}.`);
     return;

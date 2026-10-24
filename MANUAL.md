@@ -84,8 +84,8 @@ o mesmo endereço do app. Compartilhe o **link** com a outra pessoa.
 ## 5. Conversa (chat)
 
 - **Texto**: digite e aperte **Enter** (ou o botão ➤)
-- **Foto**: botão 📎 → até **1 MB**
-- **Vídeo**: botão 📎 → até **2 MB**
+- **Foto**: botão 📎 → até **5 MB**
+- **Vídeo**: botão 📎 → até **7 MB**
 - Resolução máxima: **720p** (o app recusa arquivos maiores)
 
 ---

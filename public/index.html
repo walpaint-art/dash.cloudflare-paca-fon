@@ -267,7 +267,7 @@
             <span class="material-symbols-outlined text-[20px]">send</span>
           </button>
         </div>
-        <div class="chat-hint">Foto até 1 MB · Vídeo até 2 MB · máx. 720p</div>
+        <div class="chat-hint">Foto até 5 MB · Vídeo até 7 MB · máx. 720p</div>
       </aside>
     </div>
 
@@ -319,6 +319,17 @@
   <div id="debugPanel" class="debug-panel" style="display:none;"></div>
 
   <div id="toast" class="toast"></div>
+
+  <!-- MINIATURA DE MENSAGEM (aparece durante a chamada) -->
+  <div id="chatPeek" class="chat-peek" aria-live="polite">
+    <div class="chat-peek-thumb" id="chatPeekThumb">
+      <span class="material-symbols-outlined text-[18px]">chat</span>
+    </div>
+    <div class="chat-peek-body">
+      <div class="chat-peek-name" id="chatPeekName"></div>
+      <div class="chat-peek-text" id="chatPeekText"></div>
+    </div>
+  </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="main.js"></script>

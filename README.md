@@ -11,7 +11,7 @@ Chamada de vídeo e áudio **pelo navegador**. Nada é instalado no aparelho, na
 - 🎥 **Vídeo e áudio** em malha (P2P) via **WebRTC**
 - 🔐 **Criptografia de ponta a ponta** (DTLS-SRTP) — a mídia não passa pelo servidor
 - 🗣️ **Linguagem Alfa** como identidade: ALPHA, BRAVO, CHARLIE… (10 nomes)
-- 💬 **Chat** com texto, fotos (até 1 MB) e vídeos (até 2 MB), máx. 720p
+- 💬 **Chat** com texto, fotos (até 5 MB) e vídeos (até 7 MB), máx. 720p
 - 🎚️ Modo **somente áudio** e **viva voz**
 - 👥 Painel de **participantes online** em tempo real
 - 🧹 Botão **"Sair da chamada"** que encerra, fecha o navegador e limpa a memória
